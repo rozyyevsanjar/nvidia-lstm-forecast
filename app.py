@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from Updated_LSTM1 import (
+from LSTM_Forecast import (
     run_lstm_with_features, plot_forecast_comparison, 
     baseline_features, seasonality_features, sentiment_features, full_features,
     pred_baseline, actual_baseline, mae_b, rmse_b, r2_b,
