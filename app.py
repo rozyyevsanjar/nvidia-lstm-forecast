@@ -18,11 +18,16 @@ st.title("📊 NVIDIA Stock Forecasting with LSTM")
 # === Section: Today's Top Headlines ===
 st.subheader("🗞️ Top 3 Headlines for Today")
 today_headlines = get_today_headlines()
+
 if today_headlines.empty:
     st.info("No headlines available yet for today.")
 else:
     for _, row in today_headlines.iterrows():
-        st.markdown(f"- [{row['Headline']}]({'https://news.google.com/search?q=' + row['Headline'].replace(' ', '+')})")
+        # Safely clean up brackets or characters that might break Markdown
+        headline = row['Headline'].replace('[', '').replace(']', '').strip()
+        query = '+'.join(headline.split())
+        url = f"https://news.google.com/search?q={query}"
+        st.markdown(f"- [{headline}]({url})")
 
 # === Section: Sentiment Chart ===
 st.subheader("📰 News Sentiment Over Time")
